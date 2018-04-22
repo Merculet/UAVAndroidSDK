@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MerculetSDKExample</string>
+    <string name="app_key">fb61da1dc41f4e1f8d978a9e7547edda</string>
+    <string name="account_key">4a0fa34013cc4ffba60c240ad7afe453</string>
+    <string name="account_secret">5838f70dbe2e4044a3fffd5d709f23c2</string>
+    <string name="open_id">3338f70dbe2e4044a3fffd5d709f2311</string>
+</resources>

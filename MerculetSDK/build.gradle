@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 15
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {   //上传jcenter需要
+        abortOnError false
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        //上传jcenter加上这些,避免javadoc的检查
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+            options.addStringOption('encoding', 'UTF-8')
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+}
+
+/** 以下开始是将Android Library上传到jcenter的相关配置**/
+publish {
+    userOrg = "lucio"
+    groupId = "io.merculet"
+    artifactId = "MerculetSDK"
+    publishVersion = '1.0.1'
+    desc = "MagicWindow SDK with mLink"
+    website = "https://github.com/magicwindow/mw-androidsdk-example"
+    //$ ./gradlew bintrayUpload -PbintrayUser=lucio -PbintrayKey=fbd6d0bfe8fe9b312a7138b1a5ec75a5e873728e -PdryRun=false
+}
+
+/** 打包jar **/
+//删除旧的jar的Task：deleteOldJar 名字随便写
+task deleteOldJar(type: Delete) {
+    delete 'build/outputs/MerculetSDK.jar'
+}
+//导出新的jar，exportJar也可是别的名字
+task exportJar(type: Copy) {
+//原地址
+    from('build/intermediates/bundles/release/')
+//导出后的地址
+    into('build/outputs/')
+    include('classes.jar')
+    //重命名jar
+    rename('classes.jar', 'MerculetSDK.jar')
+}
+exportJar.dependsOn(deleteOldJar, build)

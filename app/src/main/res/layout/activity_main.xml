@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.merculet.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_appkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="appKey"/>
+
+    <TextView
+        android:id="@+id/tv_appkey_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:text="@string/app_key"/>
+
+    <TextView
+        android:id="@+id/tv_accountkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_appkey"
+        android:padding="10dp"
+        android:text="accountKey"/>
+
+    <TextView
+        android:id="@+id/tv_accountkey_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_appkey"
+        android:padding="10dp"
+        android:text="@string/account_key"/>
+
+    <TextView
+        android:id="@+id/tv_accountsecret"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_accountkey"
+        android:padding="10dp"
+        android:text="accountSecret"/>
+
+    <TextView
+        android:id="@+id/tv_accountsecret_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_accountkey"
+        android:padding="10dp"
+        android:text="@string/account_secret"/>
+
+    <TextView
+        android:id="@+id/tv_open_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_accountsecret"
+        android:padding="10dp"
+        android:text="user_open_id"/>
+
+    <TextView
+        android:id="@+id/tv_open_id_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_accountsecret_text"
+        android:padding="10dp"
+        android:text="@string/open_id"/>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_open_id"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:onClick="register"
+            android:text="register"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:onClick="charge"
+            android:text="charge"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ll"
+        android:layout_weight="1"
+        android:onClick="signIn"
+        android:text="sign in"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_login"
+        android:layout_weight="1"
+        android:onClick="signOut"
+        android:text="sign out"/>
+
+</RelativeLayout>
