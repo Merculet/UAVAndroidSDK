@@ -14,7 +14,7 @@
 
 ### 1.1.2 使用Android Studio导入SDK
 
-Android Studio是谷歌推出了新的Android开发环境，【友盟+】支持AndroidStudio的Gradle配置，如您使用AndroidStudio开发，请在您的App对应build.gradle文件中加入对统计SDK和Common通用组件库的依赖：
+Android Studio是谷歌推出了新的Android开发环境，本项目支持AndroidStudio的Gradle配置，如您使用AndroidStudio开发，请在您的App对应build.gradle文件中加入对统计SDK的依赖：
 
 ```
 dependencies{
@@ -119,7 +119,7 @@ TrackAgent.currentEvent().cancelUserProfile()
 
 注：Session为基础功能，必须集成，否则后台无法获取正确报告数据。
 
-方法1**：（****Android-14之后才起作用。）**
+方法1：（Android-14之后才起作用。）
 
 MConfiguration.init(this)内已调用Session.setAutoSession(this);
 
