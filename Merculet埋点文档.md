@@ -203,19 +203,19 @@ TrackAgent.currentEvent().event (String eventId, Map<String,String> properties);
 
 # 三．测试与调试
 
-## 4.1测试前的准备
+## 3.1测试前的准备
 
-确认所需的权限都已经添加：INTERNET, READ*PHONE*STATE等
+* 确认所需的权限都已经添加：INTERNET, READ*PHONE*STATE等
 
-确认MW_APPID与WECHAT_APPID已经正确的写入Androidmanifest.xml
+* 确认MW_APPID与WECHAT_APPID已经正确的写入Androidmanifest.xml
 
-确认MWActivity在Androidmanifest.xml里正确声明
+* 确认MWActivity在Androidmanifest.xml里正确声明
 
-确认Session正确集成
+* 确认Session正确集成
 
-确认测试手机(或者模拟器)已成功连入网络
+* 确认测试手机(或者模拟器)已成功连入网络
 
-## 4.2测试流程
+## 3.2测试流程
 
 使用普通测试流程，请先在程序入口初始化MConfiguration添加以下代码打开调试模式：
 
