@@ -6,7 +6,7 @@
 
 ## 1.1导入SDK
 
-导入SDK有以下三种方法，选择其中一种即可 。
+导入SDK有以下三种方法，选择其中一种即可。
 
 ### 1.1.1  eclipse开发环境SDK集成
 
@@ -81,9 +81,6 @@ allprojects {
   <meta-data
          android:name="ACCOUNT_KEY"
 	android:value="你的account key" />
-  <meta-data
-         android:name="ACCOUNT_SECRET"
-	android:value="你的account secret " />
 ```
 
 #  
@@ -92,10 +89,10 @@ allprojects {
 
 ## 2.1初始化SDK
 
-注意: 如需要使用AndroidManifest.xml中配置好的appkey,account_key,account_secret值，UMConfigure.init调用中appkey,account_key,account_secret 参数请置为null）：
+注意: 如需要使用AndroidManifest.xml中配置好的appkey,account_key值，UMConfigure.init调用中appkey,account_key 参数请置为null）：
 
 ```
-MConfiguration.init(Application context,String app_key, String account_key, String account_secret)
+MConfiguration.init(Application context,String app_key, String account_key)
 ```
 
 在程序Application的onCreate函数中调用初始化接口
