@@ -65,34 +65,26 @@ allprojects {
 
 ##  
 
-## 1.3添加Merculet AppKey信息
+## 1.3获取Merculet AppKey等信息
 
-### 1.3.1后台获取merculetAppkey等信息
+### 1.3.1后台获取merculet Appkey等信息
 
-登录后台管理（[http://merculet.cn/](http://merculet.cn/%20)）。进入“产品管理”菜单，填写相应内容创建应用，并获取merculetApp Key. （对应移动端AndroidManifest.xml内的`M_APP_KEY`）
+登录后台管理（[http://merculet.cn/](http://merculet.cn/%20)）。进入“产品管理”菜单，填写相应内容创建应用，并获取
+appkey、account_key、account_secret的值。
 
-### 1.3.2代码内添加(AndroidManifest.xml内)
+### 1.3.2获取Token
 
-```
-<!-- 此处跟activity同级，需要放在Application内，AppKey替换为后台的”App Key”值-->
-  <meta-data
-         android:name="M_APP_KEY"
-	android:value="你的AppKey" />
-  <meta-data
-         android:name="ACCOUNT_KEY"
-	android:value="你的account key" />
-```
+基于上述三个数值，接入方需要调用Merculet的签发Token的接口。
 
-#  
+
 
 # 二．基本功能集成（必加项）
 
 ## 2.1初始化SDK
 
-注意: 如需要使用AndroidManifest.xml中配置好的appkey,account_key值，UMConfigure.init调用中appkey,account_key 参数请置为null）：
 
 ```
-MConfiguration.init(Application context,String app_key, String account_key)
+MConfiguration.init(Application context)
 ```
 
 在程序Application的onCreate函数中调用初始化接口
