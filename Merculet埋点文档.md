@@ -1,7 +1,5 @@
 ## Merculet集成文档（Android）
 
-** **
-
 # 一. 集成准备
 
 ## 1.1导入SDK
@@ -16,7 +14,7 @@
 
 Android Studio是谷歌推出了新的Android开发环境，本项目支持AndroidStudio的Gradle配置，如您使用AndroidStudio开发，请在您的App对应build.gradle文件中加入对统计SDK的依赖：
 
-```
+```groovy
 dependencies{
 	compile file(dir:'libs',include:[' MerculetSDK.jar'])
 }
@@ -28,7 +26,7 @@ dependencies{
 
 在Gradle依赖中添加：
 
-```
+```groovy
 dependencies {
 	compile 'io.merculet:MerculetSDK:1.0.1' 
 }
@@ -36,7 +34,7 @@ dependencies {
 
 如果无法正常集成请添加如下配置：
 
-```
+```groovy
 allprojects {
     repositories {
             mavenCentral()     
@@ -48,7 +46,7 @@ allprojects {
 
 ## 1.2添加权限(AndroidManifest.xml内)
 
-```
+```xml
 <!-- 连接互联网Internet权限 -->
 <uses-permission android:name="android.permission.INTERNET" />
 <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
@@ -63,13 +61,11 @@ allprojects {
 <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />  
 ```
 
-##  
-
 ## 1.3获取Merculet AppKey等信息
 
 ### 1.3.1后台获取merculet Appkey等信息
 
-登录后台管理（[http://merculet.cn/](http://merculet.cn/%20)）。进入“产品管理”菜单，填写相应内容创建应用，并获取
+登录后台管理（[http://merculet.cn/](http://merculet.cn/%20)）。进入“产品管理”菜单，填写相应内容创建应用，并获取应用的
 appkey、account_key、account_secret的值。
 
 ### 1.3.2获取Token
@@ -83,21 +79,27 @@ appkey、account_key、account_secret的值。
 ## 2.1初始化SDK
 
 
-```
+```java
 MConfiguration.init(Application context)
 ```
 
 在程序Application的onCreate函数中调用初始化接口
 
-```
+```java
 MConfiguration.init(this)
         .setLogEnable(false)
         .setPageTrackWithFragment(true);
 ```
 
-需要将用户的一些信息，比如用户名或者手机号（注意隐私）储存到服务器，以便节省某些活动的再次输入。可利用以下接口传递
+初始化完成之后，需要向sdk设置token
 
+```java
+MConfiguration.setToken(token);
 ```
+
+设置完token之后，需要将用户的一些信息，比如用户名或者手机号（注意隐私）储存到服务器，以便节省某些活动的再次输入。可利用以下接口传递
+
+```java
 在用户登录时，调用
 TrackAgent.currentEvent().setUserProfile(String userId);
 在用户注销登录时，调用
