@@ -97,12 +97,12 @@ MConfiguration.init(this)
 MConfiguration.setToken(token);
 ```
 
-设置完token之后，需要将用户的一些信息，比如用户名或者手机号（注意隐私）储存到服务器，以便节省某些活动的再次输入。可利用以下接口传递
+设置完token之后，需要将用户的一些信息，比如用户名或者手机号储存到服务器，可利用以下接口传递。
 
 ```java
-在用户登录时，调用
+//在用户登录时，调用
 TrackAgent.currentEvent().setUserProfile(String userId);
-在用户注销登录时，调用
+//在用户注销登录时，调用
 TrackAgent.currentEvent().cancelUserProfile()
 ```
 
@@ -136,7 +136,6 @@ protected void onResume() {
         super.onResume();
 }
 ```
-
 
 
 ## 2.3自定义事件功能
