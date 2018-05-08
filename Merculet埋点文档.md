@@ -112,15 +112,18 @@ TrackAgent.currentEvent().cancelUserProfile()
 
 方法1：（Android-14之后才起作用。）
 
-MConfiguration.init(this)内已调用Session.setAutoSession(this);
+```java
+MConfiguration.init(this);//内已调用Session.setAutoSession(this);
+```
 
-如果需要兼容 Android-14 （4.0）之前的版本，请用以方法：
+
+如果需要兼容 Android-14 （4.0）之前的版本，请用以下方法：
 
 方法2 ：
 
 在BaseActivity(父类activity)或者每个activity的相应函数里加入以下代码：
 
-```
+```java
 @Override
 protected void onPause() {
         Session.onPause(this);
@@ -146,14 +149,14 @@ protected void onResume() {
 
 统计发生次数
 
-```
+```java
 // eventId事件标识
 TrackAgent.currentEvent().event("您自定义的event id");
 ```
 
 统计带属性的行为触发次数
 
-```
+```java
 // eventId事件标识
 // properties事件参数的键值对
 TrackAgent.currentEvent().event("您自定义的event id", Map<String,String>);
@@ -169,7 +172,7 @@ TrackAgent.currentEvent().event ("您自定义的event id", map);
 
 代码示例：
 
-```
+```java
 // eventId事件标识
 // properties 事件参数的键值对
 //调用位置：事件开始时调用
@@ -186,7 +189,7 @@ TrackAgent.currentEvent().event (String eventId, Map<String,String> properties);
 
 ②如果需要混淆代码，为保证sdk 的正常使用，需要在proguard.cfg_加上如下配置：
 
-```
+```xml
 -keep class io.merculet.** {*;} 
 -dontwarn io.merculet.**
 -keep class io.merculet.** {*;} 
@@ -213,7 +216,7 @@ TrackAgent.currentEvent().event (String eventId, Map<String,String> properties);
 
 使用普通测试流程，请先在程序入口初始化MConfiguration添加以下代码打开调试模式：
 
-```
+```java
 config.setDebugMode( true );  
 ```
 
