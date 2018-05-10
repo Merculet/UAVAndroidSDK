@@ -32,6 +32,7 @@ import io.merculet.util.Util;
 /**
  * @Description
  * @Author lucio
+ * @Email xiao.lu@magicwindow.cn
  * @Date 08/03/2018 11:42 AM
  * @Version
  */
@@ -142,7 +143,7 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
         //提前初始化uid
         spHelper.setUid(userProfile);
         spHelper.setProfile(userProfile);
-        RequestManager.initToken();
+//        RequestManager.initToken();
     }
 
     @Override

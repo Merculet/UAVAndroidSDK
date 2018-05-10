@@ -3,6 +3,10 @@
  * An open source analytics android sdk for mobile applications
  * ************************************************************
  *
+ * @author Magic Window Liability Company
+ * @copyright Copyright 2014-2016, Magic Window Limited Liability Company
+ * @since Version 1.0
+ * <p/>
  * *****************************************************
  * This project is available under the following license
  * *****************************************************

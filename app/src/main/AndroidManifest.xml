@@ -38,18 +38,6 @@
 
         <service android:name="io.merculet.CheckExitService" />
 
-        <!-- 后台APPID（也就是APPKey） -->
-        <meta-data
-            android:name="M_APP_KEY"
-            android:value="@string/app_key" />
-
-        <meta-data
-            android:name="ACCOUNT_KEY"
-            android:value="@string/account_key" />
-
-        <meta-data
-            android:name="ACCOUNT_SECRET"
-            android:value="@string/account_secret" />
         <!-- 渠道 -->
         <meta-data
             android:name="M_CHANNEL"

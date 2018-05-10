@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
         if (SPHelper.create().isAuto()) {
             HashMap<String, String> properties = new HashMap<>();
             properties.put("invitationCode", "2098");
-            TrackAgent.currentEvent().event("rigister", properties);
+            TrackAgent.currentEvent().event("register", properties);
         } else {
             Toast.makeText(this, "click sign in first", Toast.LENGTH_SHORT).show();
         }

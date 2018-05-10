@@ -6,6 +6,7 @@ import io.merculet.domain.event.EventsProxy;
 /**
  * @Description
  * @Author lucio
+ * @Email xiao.lu@magicwindow.cn
  * @Date 09/03/2018 5:29 PM
  * @Version
  */

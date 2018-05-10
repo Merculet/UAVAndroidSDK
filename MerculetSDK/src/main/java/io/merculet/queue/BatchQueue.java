@@ -11,6 +11,7 @@ import io.merculet.log.DebugLog;
 /**
  * @Description queue
  * @Author lucio
+ * @Email xiao.lu@magicwindow.cn
  * @Date 12/03/2018 11:48 PM
  * @Version 1.0.0
  */

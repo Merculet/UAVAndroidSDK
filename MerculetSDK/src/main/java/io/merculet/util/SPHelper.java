@@ -29,6 +29,7 @@ public class SPHelper {
     private final String PAGE_WITH_FRAGMENT = "page_with_fragment";
     private final String DISK_CACHE_ENABLE = "disk_cache_enable";
     private boolean DebugMode = false;
+    private boolean chinaEnable = false;
     private String TAG = "SPHelper";
 
     public static SPHelper create() {
@@ -424,6 +425,14 @@ public class SPHelper {
             remove(Constant.SP_USER_MD5);
             remove(M_TOKEN);
         }
+    }
+
+    public boolean getChinaEnable() {
+        return chinaEnable;
+    }
+
+    public void setChinaEnable(boolean enable) {
+        chinaEnable = enable;
     }
 
 }

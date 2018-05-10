@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 
+import io.merculet.config.APIConstant;
 import io.merculet.reflect.Reflect;
 import io.merculet.util.SPHelper;
 
@@ -79,6 +80,16 @@ public class MConfiguration {
 
     public MConfiguration diskCache(boolean enable) {
         SPHelper.create().setDiskCache(enable);
+        return this;
+    }
+
+    public MConfiguration setToken(String token) {
+        SPHelper.create().setToken(token);
+        return this;
+    }
+
+    public MConfiguration setChinaEnable(boolean enable) {
+        SPHelper.create().setChinaEnable(enable);
         return this;
     }
 }

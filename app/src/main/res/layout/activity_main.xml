@@ -8,59 +8,9 @@
     tools:context="io.merculet.MainActivity">
 
     <TextView
-        android:id="@+id/tv_appkey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="appKey"/>
-
-    <TextView
-        android:id="@+id/tv_appkey_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"
-        android:text="@string/app_key"/>
-
-    <TextView
-        android:id="@+id/tv_accountkey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_appkey"
-        android:padding="10dp"
-        android:text="accountKey"/>
-
-    <TextView
-        android:id="@+id/tv_accountkey_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_appkey"
-        android:padding="10dp"
-        android:text="@string/account_key"/>
-
-    <TextView
-        android:id="@+id/tv_accountsecret"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_accountkey"
-        android:padding="10dp"
-        android:text="accountSecret"/>
-
-    <TextView
-        android:id="@+id/tv_accountsecret_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_accountkey"
-        android:padding="10dp"
-        android:text="@string/account_secret"/>
-
-    <TextView
         android:id="@+id/tv_open_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_accountsecret"
         android:padding="10dp"
         android:text="user_open_id"/>
 
@@ -69,7 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_accountsecret_text"
         android:padding="10dp"
         android:text="@string/open_id"/>
 
