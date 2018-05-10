@@ -1,4 +1,4 @@
-## Merculet集成文档（Android）
+## Android集成文档
 
 # 一. 集成准备
 
@@ -28,7 +28,7 @@ dependencies{
 
 ```groovy
 dependencies {
-	compile 'io.merculet:MerculetSDK:1.0.1' 
+	compile 'io.merculet:MerculetSDK:1.0.1'
 }
 ```
 
@@ -42,7 +42,7 @@ allprojects {
 }
 ```
 
-## 
+##
 
 ## 1.2添加权限(AndroidManifest.xml内)
 
@@ -162,7 +162,7 @@ TrackAgent.currentEvent().event("您自定义的event id", Map<String,String>);
 代码示例：：
 HashMap<String,String> map = new HashMap<String,String>();
 map.put("invitationCode","2098");
-map.put("amount","300"); 
+map.put("amount","300");
 map.put("sign in","300"); //登录
 TrackAgent.currentEvent().event ("您自定义的event id", map);
 ```
@@ -177,7 +177,7 @@ TrackAgent.currentEvent().event ("您自定义的event id", map);
 //调用位置：事件开始时调用
 TrackAgent.currentEvent().event Start(String eventId );
 //调用位置：事件结束后调用
-TrackAgent.currentEvent().event (String eventId, Map<String,String> properties); 
+TrackAgent.currentEvent().event (String eventId, Map<String,String> properties);
 ```
 
 
@@ -189,13 +189,13 @@ TrackAgent.currentEvent().event (String eventId, Map<String,String> properties);
 ②如果需要混淆代码，为保证sdk 的正常使用，需要在proguard.cfg_加上如下配置：
 
 ```xml
--keep class io.merculet.** {*;} 
+-keep class io.merculet.** {*;}
 -dontwarn io.merculet.**
--keep class io.merculet.** {*;} 
--keep public enum 
+-keep class io.merculet.** {*;}
+-keep public enum
 ```
 
- 
+
 
 # 三．测试与调试
 
