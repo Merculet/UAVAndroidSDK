@@ -61,16 +61,16 @@ allprojects {
 <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />  
 ```
 
-## 1.3获取Merculet AppKey等信息
+## 1.3获取AppKey等信息
 
-### 1.3.1后台获取merculet Appkey等信息
+### 1.3.1后台获取Appkey等信息
 
-登录后台管理（[http://merculet.cn/](http://merculet.cn/%20)）。进入“产品管理”菜单，填写相应内容创建应用，并获取应用的
+登录后台管理（[http://merculet.cn/](http://merculet.cn/)）。进入“产品管理”菜单，填写相应内容创建应用，并获取应用的
 appkey、account_key、account_secret的值。
 
 ### 1.3.2获取Token
 
-基于上述三个数值，接入方需要调用Merculet的签发Token的接口。
+基于上述三个数值，接入方需要调用签发Token的接口。
 
 
 
