@@ -65,6 +65,7 @@ public class DebugLog {
 
         stackOffset++;
         StringBuilder builder = new StringBuilder();
+        builder.append("  ").append(LoggerPrinter.BR);
         builder.append(LoggerPrinter.TOP_BORDER).append("\r\n")
                 // 添加当前线程名
                 .append("║ " + "MW SDK Version: " + Constant.VERSION).append("\r\n")
@@ -141,43 +142,6 @@ public class DebugLog {
 
         String s = getMethodNames();
         Log.w(SDK_INTEGRATION_OK, String.format(s,message));
-    }
-
-    /**
-     * 可以打印出json字符串
-     * @param json
-     */
-    public static void json(String json) {
-        if (!isDebuggable())
-            return;
-
-        if (Preconditions.isBlank(json)) {
-            d("Empty/Null json content");
-            return;
-        }
-
-        try {
-            json = json.trim();
-            if (json.startsWith("{")) {
-                JSONObject jsonObject = new JSONObject(json);
-                String message = jsonObject.toString(LoggerPrinter.JSON_INDENT);
-                message = message.replaceAll("\n","\n║ ");
-                String s = getMethodNames();
-                System.out.println(String.format(s,message));
-                return;
-            }
-            if (json.startsWith("[")) {
-                JSONArray jsonArray = new JSONArray(json);
-                String message = jsonArray.toString(LoggerPrinter.JSON_INDENT);
-                message = message.replaceAll("\n","\n║ ");
-                String s = getMethodNames();
-                System.out.println(String.format(s,message));
-                return;
-            }
-            e("Invalid Json");
-        } catch (JSONException e) {
-            e("Invalid Json");
-        }
     }
 }
 

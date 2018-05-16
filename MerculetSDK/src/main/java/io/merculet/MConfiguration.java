@@ -58,11 +58,6 @@ public class MConfiguration {
         return context;
     }
 
-    @Deprecated
-    public MConfiguration setDebugModel(boolean enable) {
-        return setLogEnable(enable);
-    }
-
     public MConfiguration setLogEnable(boolean enable) {
         SPHelper.create().setLogEnable(enable);
         return this;

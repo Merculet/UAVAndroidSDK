@@ -20,6 +20,8 @@ final class LoggerPrinter {
     public static final String TOP_BORDER = TOP_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
     public static final String BOTTOM_BORDER = BOTTOM_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
     public static final String MIDDLE_BORDER = MIDDLE_CORNER + SINGLE_DIVIDER + SINGLE_DIVIDER;
+    public static final String BR = System.getProperty("line.separator");     // 换行符
+
 
     /**
      * It is used for json pretty print
