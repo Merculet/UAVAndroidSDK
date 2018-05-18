@@ -80,13 +80,13 @@ appkey、account_key、account_secret的值。
 
 
 ```java
-MConfiguration.init(Application context)
+MConfiguration.get().init(Application context)
 ```
 
 在程序Application的onCreate函数中调用初始化接口
 
 ```java
-MConfiguration.init(this)
+MConfiguration.get().init(this)
         .setLogEnable(false)
         .setPageTrackWithFragment(true);
 ```
@@ -113,7 +113,7 @@ TrackAgent.currentEvent().cancelUserProfile()
 方法1：（Android-14之后才起作用。）
 
 ```java
-MConfiguration.init(this);//内已调用Session.setAutoSession(this);
+MConfiguration.get().init(this);//内已调用Session.setAutoSession(this);
 ```
 
 
