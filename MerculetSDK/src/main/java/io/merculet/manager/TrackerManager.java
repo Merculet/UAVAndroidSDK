@@ -50,7 +50,7 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
     @Override
     public void init(Application application) {
         launchEvent();
-        MConfiguration.initContext(application);
+        MConfiguration.get().initContext(application);
         if (Build.VERSION.SDK_INT < 14) return;
 
         try {
@@ -74,7 +74,7 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                DeviceInfoUtils.initDeviceInfo(MConfiguration.getContext());
+                DeviceInfoUtils.initDeviceInfo(MConfiguration.get().getContext());
                 EventsProxy.create().onSend();
             }
         });
@@ -158,7 +158,7 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
 
     private void pause(final Context context, String pageTitle) {
         //初始化MWConfiguration
-        MConfiguration.initContext(context);
+        MConfiguration.get().initContext(context);
         if (!spHelper.isPageWithFragment()) {
             if (Preconditions.isBlank(pageTitle)) {
                 pageTitle = context.getClass().getName();
@@ -225,7 +225,7 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
 
     private void resume(Context context, String pageTitle) {
         //初始化MWConfiguration
-        MConfiguration.initContext(context);
+        MConfiguration.get().initContext(context);
         onStart();
         if (!spHelper.isPageWithFragment()) {
             if (Preconditions.isBlank(pageTitle)) {
@@ -246,13 +246,13 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
     }
 
     private boolean isAppExit() {
-        if (MConfiguration.getContext() == null) {
+        if (MConfiguration.get().getContext() == null) {
             return true;
         }
 
-        String packageName = MConfiguration.getContext().getPackageName();
-        if (Util.checkPermission(MConfiguration.getContext(), "android.permission.GET_TASKS")) {
-            ActivityManager am = (ActivityManager) MConfiguration.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = MConfiguration.get().getContext().getPackageName();
+        if (Util.checkPermission(MConfiguration.get().getContext(), "android.permission.GET_TASKS")) {
+            ActivityManager am = (ActivityManager) MConfiguration.get().getContext().getSystemService(Context.ACTIVITY_SERVICE);
             if (am != null && Preconditions.isNotBlank(am.getRunningTasks(1)) && am.getRunningTasks(1).get(0) != null && am.getRunningTasks(1).get(0).topActivity != null) {
                 ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
                 return !packageName.equals(cn.getPackageName());
@@ -267,8 +267,8 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
     private boolean isAppOnForeground() {
         // Returns a list of application processes that are running on the
         // device
-        String packageName = MConfiguration.getContext().getPackageName();
-        ActivityManager activityManager = (ActivityManager) MConfiguration.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = MConfiguration.get().getContext().getPackageName();
+        ActivityManager activityManager = (ActivityManager) MConfiguration.get().getContext().getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
         if (Preconditions.isBlank(appProcesses)) {
             return false;

@@ -15,7 +15,7 @@ public class MApp extends Application {
     public void onCreate() {
         super.onCreate();
         //启动页初始化
-        MConfiguration.init(this)
+        MConfiguration.get().init(this)
                 .setLogEnable(true)
                 .setPageTrackWithFragment(true)
                 .setChinaEnable(true)

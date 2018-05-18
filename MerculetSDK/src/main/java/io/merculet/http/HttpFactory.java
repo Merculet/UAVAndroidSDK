@@ -16,7 +16,7 @@ public class HttpFactory {
     private ImageLoader mImageLoader;
 
     private HttpFactory(Context context) {
-        MConfiguration.initContext(context);
+        MConfiguration.get().initContext(context);
         mRequestQueue = getRequestQueue();
 
     }

@@ -44,11 +44,11 @@ public class SPHelper {
     }
 
     private SharedPreferences getSP() {
-        if (MConfiguration.getContext() == null) {
+        if (MConfiguration.get().getContext() == null) {
             return null;
         }
         try {
-            return MConfiguration.getContext().getSharedPreferences(SP_KEY_DEFAULT, Context.MODE_PRIVATE);
+            return MConfiguration.get().getContext().getSharedPreferences(SP_KEY_DEFAULT, Context.MODE_PRIVATE);
         } catch (OutOfMemoryError ignored) {
 
         }
@@ -259,30 +259,6 @@ public class SPHelper {
         putString(Constant.SP_USER_ID, userId);
     }
 
-    public String getAppKey() {
-        return getString(Constant.M_APP_KEY);
-    }
-
-    public void setAppKey(String appKey) {
-        putString(Constant.M_APP_KEY, appKey);
-    }
-
-    public String getAccountSecret() {
-        return getString(Constant.SP_ACCOUNT_SECRET);
-    }
-
-    public void setAccountSecret(String accountSecret) {
-        putString(Constant.SP_ACCOUNT_SECRET, accountSecret);
-    }
-
-    public String getAccountKey() {
-        return getString(Constant.SP_ACCOUNT_KEY);
-    }
-
-    public void setAccountKey(String accountKey) {
-        putString(Constant.SP_ACCOUNT_KEY, accountKey);
-    }
-
     /**
      * 数据满多少发送
      *
@@ -403,7 +379,7 @@ public class SPHelper {
 
     public void setUid(UserProfile profile) {
         if (profile != null) {
-            String uid = StringUtils.md5(Util.getMAppKey() + profile.profileId + DeviceInfoUtils.getDeviceId(MConfiguration.getContext()));
+            String uid = StringUtils.md5(profile.profileId + DeviceInfoUtils.getDeviceId(MConfiguration.get().getContext()));
             putString(Constant.SP_USER_MD5, uid);
         } else {
             remove(Constant.SP_USER_MD5);
@@ -416,7 +392,7 @@ public class SPHelper {
             putString(Constant.SP_USER_PROFILE, profile.toString());
             putString(Constant.SP_USER_ID, profile.profileId);
             putString(Constant.SP_USER_PHONE, profile.phone);
-            String uid = StringUtils.md5(Util.getMAppKey() + profile.profileId + DeviceInfoUtils.getDeviceId(MConfiguration.getContext()));
+            String uid = StringUtils.md5(profile.profileId + DeviceInfoUtils.getDeviceId(MConfiguration.get().getContext()));
             putString(Constant.SP_USER_MD5, uid);
         } else {
             remove(Constant.SP_USER_PROFILE);

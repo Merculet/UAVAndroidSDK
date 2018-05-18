@@ -33,9 +33,6 @@ public final class Constant {
      * ******key    start***********
      */
     //SharedPreferences Key
-    public final static String M_APP_KEY = "M_APP_KEY";
-    public final static String M_ACCOUNT_KEY = "ACCOUNT_KEY";
-    public final static String M_ACCOUNT_SECRET = "ACCOUNT_SECRET";
     public final static String M_CHANNEL = "M_CHANNEL";
     /**
      * ***********value  end**************
@@ -54,8 +51,6 @@ public final class Constant {
     public final static String SP_FIRST_LAUNCH = "sp_first_launch";
     public final static String SP_USER_ID = "sp_user_id";
     public final static String SP_USER_PHONE = "sp_user_phone";
-    public final static String SP_ACCOUNT_SECRET = "sp_account_secret";
-    public final static String SP_ACCOUNT_KEY = "sp_account_key";
     public final static String SP_USER_MD5 = "sp_user_md5";
     public final static String SP_USER_PROFILE = "sp_profile";
 

@@ -50,11 +50,11 @@ public class RequestManager {
                         if (tokenRes.code == 1) {   //token失效,重新获取
 //                            initToken();
                         }
-                        MessageUtils.insertMsg(MConfiguration.getContext(), upData, MessageUtils.TYPE_COMMON);
+                        MessageUtils.insertMsg(MConfiguration.get().getContext(), upData, MessageUtils.TYPE_COMMON);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    MessageUtils.insertMsg(MConfiguration.getContext(), upData, MessageUtils.TYPE_COMMON);
+                    MessageUtils.insertMsg(MConfiguration.get().getContext(), upData, MessageUtils.TYPE_COMMON);
                 }
                 //此时说明网络是好的，可以发送数据库缓存数据
                 //DB数据只要启动和关闭时上传即可。del by aaron
@@ -65,7 +65,7 @@ public class RequestManager {
             @Override
             public void onFail(Exception e) {
 //                DebugLog.e("Track upload error: " + e);
-                MessageUtils.insertMsg(MConfiguration.getContext(), upData, MessageUtils.TYPE_COMMON);
+                MessageUtils.insertMsg(MConfiguration.get().getContext(), upData, MessageUtils.TYPE_COMMON);
             }
         });
 
@@ -79,7 +79,7 @@ public class RequestManager {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        HttpFactory.getInstance(MConfiguration.getContext()).addToRequestQueue(request);
+        HttpFactory.getInstance(MConfiguration.get().getContext()).addToRequestQueue(request);
     }
 
     public synchronized static void uploadDb() {
@@ -90,7 +90,7 @@ public class RequestManager {
         SPHelper.create().setLastSendTime(currentTime);
         SPHelper.create().setLastSendDb(currentTime);
 
-        final MsgModel msgModel = MessageUtils.getEventMsgLimit(MConfiguration.getContext(), -1);
+        final MsgModel msgModel = MessageUtils.getEventMsgLimit(MConfiguration.get().getContext(), -1);
 
         if (msgModel != null && Preconditions.isNotBlank(msgModel.getDataList())) {
 
@@ -106,6 +106,9 @@ public class RequestManager {
                 //todo: mw_appid
                 if (Preconditions.isNotBlank(data)) {
                     DebugLog.i("Track upload uploadDb: " + data);
+
+                    final String upDataStr = data.replace("\"","\\\"");
+
                     request = new JsonRequest(Request.HttpMethod.POST, APIConstant.getTrackingUrl(), new ResponseListener<JSONObject>() {
 
                         @Override
@@ -113,7 +116,7 @@ public class RequestManager {
                             try {
                                 TokenRes tokenRes = JSONUtils.convertToObj(content, TokenRes.class);
                                 if (tokenRes.isOkStatus()) {
-                                    MessageUtils.deleteMsgByID(MConfiguration.getContext(), id);
+                                    MessageUtils.deleteMsgByID(MConfiguration.get().getContext(), id);
                                     //设置非第一次启动tag
                                     DeviceInfoUtils.setFirstTag();
                                 } else {
@@ -134,13 +137,18 @@ public class RequestManager {
                         public void onFail(Exception e) {
                         }
                     });
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("{").append("\r\n").append("\"info\":\"").append(upDataStr).append("\"").append("\r\n").append("}");
+
                     try {
+                        request.addHeader("mw-sign", SignUtils.generateSign(data));
                         request.addHeader("mw-token", SPHelper.create().getToken());
-                        request.setBodyParams(new JSONObject(data));
+                        request.setBodyParams(new JSONObject(sb.toString()));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    HttpFactory.getInstance(MConfiguration.getContext()).addToRequestQueue(request);
+                    HttpFactory.getInstance(MConfiguration.get().getContext()).addToRequestQueue(request);
                 }
             }
         }

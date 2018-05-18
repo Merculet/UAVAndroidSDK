@@ -71,7 +71,7 @@ final class NetworkExecutor extends Thread {
     private void doRequest(Request request) {
 
         //如果没有权限，则不需要申请网络
-        if (!Util.checkPermission(MConfiguration.getContext(), "android.permission.INTERNET")) {
+        if (!Util.checkPermission(MConfiguration.get().getContext(), "android.permission.INTERNET")) {
             return;
         }
         byte[] responseBytes = new byte[0];

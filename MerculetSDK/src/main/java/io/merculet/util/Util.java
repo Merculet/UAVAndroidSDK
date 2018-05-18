@@ -44,35 +44,6 @@ public class Util {
         return String.valueOf(System.currentTimeMillis() / 1000);
     }
 
-    public static String getMAppKey() {
-
-        if (Preconditions.isBlank(MWAppId)) {
-            MWAppId = getMetaDataFromApplication(Constant.M_APP_KEY);
-        }
-
-        return MWAppId;
-    }
-
-    public static String getAccountKey() {
-
-        if (Preconditions.isBlank(ACCOUNT_KEY)) {
-            ACCOUNT_KEY = getMetaDataFromApplication(Constant.M_ACCOUNT_KEY);
-        }
-
-        return ACCOUNT_KEY;
-    }
-
-
-    public static String getAccountSecret() {
-
-        if (Preconditions.isBlank(SECRET_CODE)) {
-            SECRET_CODE = getMetaDataFromApplication(Constant.M_ACCOUNT_SECRET);
-        }
-
-        return SECRET_CODE;
-    }
-
-
     public static String getMChannel() {
 
         if (Preconditions.isBlank(MWChannel)) {
@@ -92,8 +63,8 @@ public class Util {
         }
 
         try {
-            ApplicationInfo appInfo = MConfiguration.getContext().getPackageManager()
-                    .getApplicationInfo(MConfiguration.getContext().getPackageName(),
+            ApplicationInfo appInfo = MConfiguration.get().getContext().getPackageManager()
+                    .getApplicationInfo(MConfiguration.get().getContext().getPackageName(),
                             PackageManager.GET_META_DATA);
             if (appInfo.metaData != null) {
                 metaData = appInfo.metaData.getString(tag);
@@ -154,7 +125,7 @@ public class Util {
     public static boolean checkPermission(Context context, String permission) {
 
         if (context == null) {
-            context = MConfiguration.getContext();
+            context = MConfiguration.get().getContext();
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             PackageManager localPackageManager = context.getApplicationContext().getPackageManager();

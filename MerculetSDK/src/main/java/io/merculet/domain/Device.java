@@ -21,15 +21,15 @@ public class Device {
     public String n;      //如果为新设备，则为0，否则为1
 
     public Device() {
-        this.d = DeviceInfoUtils.getDeviceId(MConfiguration.getContext());
-        this.fp = DeviceInfoUtils.getFingerPrinter(MConfiguration.getContext());
+        this.d = DeviceInfoUtils.getDeviceId(MConfiguration.get().getContext());
+        this.fp = DeviceInfoUtils.getFingerPrinter(MConfiguration.get().getContext());
         this.os = DeviceInfoUtils.getOs();
         this.osv = DeviceInfoUtils.getOSVersion();
         this.b = DeviceInfoUtils.getBranding();
         this.m = DeviceInfoUtils.getDevice();
         this.mf = DeviceInfoUtils.getManufacturer();
-        this.c = DeviceInfoUtils.getCarrier(MConfiguration.getContext());
-        this.sr = DeviceInfoUtils.getScreenSize(MConfiguration.getContext());
+        this.c = DeviceInfoUtils.getCarrier(MConfiguration.get().getContext());
+        this.sr = DeviceInfoUtils.getScreenSize(MConfiguration.get().getContext());
         this.fa = DeviceInfoUtils.getFirstTimeAccess();
         this.n = DeviceInfoUtils.getFirstTag();
     }

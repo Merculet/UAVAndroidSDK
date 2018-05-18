@@ -14,11 +14,11 @@ public class DBManager {
 
     public static void insertEventByMsg() {
         EventsProxy eventsProxy = EventsProxy.create();
-        MessageUtils.insertMsg(MConfiguration.getContext(), eventsProxy.getJsonString(), MessageUtils.TYPE_COMMON);
+        MessageUtils.insertMsg(MConfiguration.get().getContext(), eventsProxy.getJsonString(), MessageUtils.TYPE_COMMON);
         eventsProxy.clearEvents();
     }
 
     public static void insertEventByMsg(String upData, String type) {
-        MessageUtils.insertMsg(MConfiguration.getContext(), upData, type);
+        MessageUtils.insertMsg(MConfiguration.get().getContext(), upData, type);
     }
 }

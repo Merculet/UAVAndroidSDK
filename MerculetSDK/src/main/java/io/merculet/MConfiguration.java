@@ -15,26 +15,24 @@ public class MConfiguration {
     private MConfiguration() {
     }
 
+    public static MConfiguration get() {
+        return MConfiguration.Holder.CONFIGURATION;
+    }
+
+    private static class Holder {
+        private static final MConfiguration CONFIGURATION = new MConfiguration();
+    }
+
     /**
      * 初始化sdk
      */
-    public static synchronized MConfiguration init(Application context,String app_key, String account_key, String account_secret) {
+    public synchronized MConfiguration init(Application context) {
         initContext(context);
         Session.setAutoSession(context);
-        SPHelper spHelper = SPHelper.create();
-        spHelper.setAppKey(app_key);
-        spHelper.setAccountKey(account_key);
-        spHelper.setAccountSecret(account_secret);
-        return new MConfiguration();
+        return this;
     }
 
-    public static synchronized MConfiguration init(Application context) {
-        initContext(context);
-        Session.setAutoSession(context);
-        return new MConfiguration();
-    }
-
-    private static synchronized void initDefaultValue(Context context) {
+    private synchronized void initDefaultValue(Context context) {
         if (context != null) {
             MConfiguration.context = context.getApplicationContext();
         } else if (Build.VERSION.SDK_INT >= 14) {
@@ -45,13 +43,13 @@ public class MConfiguration {
         spHelper.setPageWithFragment(false);
     }
 
-    public static void initContext(Context context) {
+    public void initContext(Context context) {
         if (context != null && MConfiguration.context == null) {
             initDefaultValue(context);
         }
     }
 
-    public static Context getContext() {
+    public Context getContext() {
         if (context == null && Build.VERSION.SDK_INT >= 14) {
             context = Reflect.on("android.app.ActivityThread").call("currentApplication").get();
         }

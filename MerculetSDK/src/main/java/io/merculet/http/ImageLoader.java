@@ -81,7 +81,7 @@ public class ImageLoader {
     public ImageLoader(RequestQueue queue, ImageCache imageCache) {
         mRequestQueue = queue;
         mCache = imageCache;
-        mDiskCache = new DiskLruImageCache(MConfiguration.getContext());
+        mDiskCache = new DiskLruImageCache(MConfiguration.get().getContext());
     }
 
     /**
