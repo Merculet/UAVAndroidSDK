@@ -135,6 +135,10 @@ public class RequestManager {
 
                         @Override
                         public void onFail(Exception e) {
+                            //退出发送数据失败,就清空本地数据
+                            if (!SPHelper.create().isAuto()) {
+                                MessageUtils.deleteMsgByID(MConfiguration.get().getContext(), id);
+                            }
                         }
                     });
 

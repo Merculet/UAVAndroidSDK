@@ -153,6 +153,7 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
 
     @Override
     public void cancelUserProfile() {
+        EventsProxy.create().onSend();  //退出登录上传数据
         spHelper.setProfile(null);
     }
 
@@ -197,6 +198,14 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
 
         CustomEvent custom = new CustomEvent();
 //          custom.st = Util.getCurrentTimeSecondStr();
+
+        if (properties == null) {
+
+            properties = new HashMap<>();
+        }
+
+        properties.put(Constant.SP_USER_TIMESTAMP,String.valueOf(System.currentTimeMillis()));
+
         custom.action_params = properties;
         custom.action = id;
         custom.send();

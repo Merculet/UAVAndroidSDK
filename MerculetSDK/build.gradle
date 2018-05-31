@@ -42,7 +42,7 @@ publish {
     userOrg = "lucio"
     groupId = "io.merculet"
     artifactId = "MerculetSDK"
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = "MagicWindow SDK with mLink"
     website = "https://github.com/magicwindow/mw-androidsdk-example"
     //$ ./gradlew bintrayUpload -PbintrayUser=lucio -PbintrayKey=fbd6d0bfe8fe9b312a7138b1a5ec75a5e873728e -PdryRun=false

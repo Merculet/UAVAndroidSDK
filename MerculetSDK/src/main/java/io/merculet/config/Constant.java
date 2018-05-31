@@ -53,6 +53,7 @@ public final class Constant {
     public final static String SP_USER_PHONE = "sp_user_phone";
     public final static String SP_USER_MD5 = "sp_user_md5";
     public final static String SP_USER_PROFILE = "sp_profile";
+    public final static String SP_USER_TIMESTAMP = "sp_timestamp";
 
 
     public final static int BACK_GROUND_TIME = 600;//魅族mx5准确值是370,三星s7是550.
