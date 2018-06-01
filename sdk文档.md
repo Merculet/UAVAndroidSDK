@@ -88,21 +88,22 @@ MConfiguration.get().init(Application context)
 ```java
 MConfiguration.get().init(this)
         .setLogEnable(false)
-        .setPageTrackWithFragment(true);
+        .setPageTrackWithFragment(true)
+        .setChinaEnable(true);
 ```
 
-初始化完成之后，需要向sdk设置token
+初始化完成之后，需要向sdk设置token。此token需要调用获取用户凭证接口获得(https://mb-helpcenter.magicwindow.cn/doc/api)
 
 ```java
-MConfiguration.setToken(token);
+MConfiguration.get().init(app).setToken(token);
 ```
 
-设置完token之后，需要将用户的一些信息，比如用户名或者手机号储存到服务器，可利用以下接口传递。
+设置完token之后完成sdk的初始化工作。
+
+
+此外，值得注意的是在用户注销登录时，需要调用
 
 ```java
-//在用户登录时，调用
-TrackAgent.currentEvent().setUserProfile(String userId);
-//在用户注销登录时，调用
 TrackAgent.currentEvent().cancelUserProfile()
 ```
 
