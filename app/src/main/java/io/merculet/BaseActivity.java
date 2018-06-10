@@ -3,7 +3,8 @@ package io.merculet;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import io.merculet.Session;
+import io.merculet.uav.sdk.Session;
+
 
 public class BaseActivity extends AppCompatActivity {
 

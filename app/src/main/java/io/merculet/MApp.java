@@ -3,6 +3,9 @@ package io.merculet;
 import android.app.Application;
 import android.content.Intent;
 
+import io.merculet.uav.sdk.MConfiguration;
+
+
 /**
  * @Description
  * @Author luxiao418
@@ -17,9 +20,7 @@ public class MApp extends Application {
         //启动页初始化
         MConfiguration.get().init(this)
                 .setLogEnable(true)
-                .setPageTrackWithFragment(true)
-                .setChinaEnable(true)
-                .setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4NTQ5MDU4MmVkZTg0MTdiODNiZTdiOTc5NTI0NGNiMyIsImlhdCI6MTUyNjQ2MTMyNywiZXhwIjoxNTI2NjM0MTI3LCJhcHAiOiIwYmI5YjlkNDA3MmQ0N2JhOGViOGFmN2M4YzQ3NmRkMyIsImV4dGVybmFsX3VzZXJfaWQiOiJ6aG91dGFvMSIsImFwcF9sb2dpbl91cmwiOiJodHRwczovL3Byb3RlZ2UuenhpbnNpZ2h0LmNvbS9qb2ludC1sb2dpbiJ9.knM8cFoTEkPcdoixrP5R-7eNe75laVG_GAMaywqMwOg");
+                .setPageTrackWithFragment(true);
 
         Intent intent = new Intent(this, CheckExitService.class);
         getApplicationContext().startService(intent);

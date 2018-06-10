@@ -8,7 +8,9 @@ import android.support.annotation.Nullable;
 
 import java.util.List;
 
-import io.merculet.log.DebugLog;
+import io.merculet.uav.sdk.Session;
+import io.merculet.uav.sdk.log.DebugLog;
+
 
 public class CheckExitService extends Service {
 

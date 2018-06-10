@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">MerculetSDKExample</string>
-    <string name="open_id">3338f70dbe2e4044a3fffd5d709f2311</string>
+
+    <string name="invalid_token">
+        eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4NTQ5MDU4MmVkZTg0MTdiODNiZTdiOTc5NTI0NGNiMyIsImlhdCI6MTUyNzY4MjA1OCwiZXhwIjoxNTI3ODU0ODU4LCJhcHAiOiIwYmI5YjlkNDA3MmQ0N2JhOGViOGFmN2M4YzQ3NmRkMyIsImV4dGVybmFsX3VzZXJfaWQiOiJ3YW5nd2VpIiwiYXBwX2xvZ2luX3VybCI6Imh0dHBzOi8vcHJvdGVnZS56eGluc2lnaHQuY29tL2pvaW50LWxvZ2luIn0.N55tbX-Q_sKBx5QFOaurjmLW9SVHKeY3mJuJqwp2eMk
+    </string>
+
+    <string name="default_user_id">3338f70dbe2e4044a3fffd5d709f2311</string>
+    <string name="other_user_id">3338f70dbe2e4044a3fffd5d709f2322</string>
 </resources>

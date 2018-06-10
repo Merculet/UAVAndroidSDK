@@ -46,6 +46,8 @@
 
 -keep public class * extends android.app.Activity
 
+-keep public class * extends android.support.v7.app.AppCompatActivity
+
 -keep public class * extends android.app.Application
 
 -keep public class * extends android.app.Service
@@ -149,103 +151,36 @@
 
 ########### MagicWindow Core Start###########
 
--keep class io.merculet.domain.** {*;}
--keep class io.merculet.analytics.domain.** {*;}
+-keep class io.merculet.uav.sdk.domain.** {*;}
+-keep class io.merculet.uav.sdk.MConfiguration {*;}
+-keep class io.merculet.uav.sdk.manager.MWLifecycleCallbacks {*;}
+-keep class io.merculet.uav.sdk.Session {<methods>;}
 
--keep class io.merculet.Session {<methods>;}
-
--keep class io.merculet.TrackAgent {<methods>;}
-
--keep public class io.merculet.TrackAgent$TrackerInterface {
+-keep class io.merculet.uav.sdk.TrackAgent {<methods>;}
+-keep interface io.merculet.uav.sdk.TrackAgent$TrackerInterface {
     <fields>;
     <methods>;
 }
+-keep class io.merculet.uav.sdk.queue.** {*;}
+-keep class io.merculet.uav.sdk.config.Constant{*;}
+-keep class io.merculet.uav.sdk.log.DebugLog{<methods>;}
+-keep class io.merculet.uav.sdk.ShareHelper{<methods>;}
 
--keep class io.merculet.MConfiguration {*;}
-
--keep class io.merculet.MApiFactory {*;}
-
--keep class io.merculet.MerculetSDK {<methods>;}
-
--keep class io.merculet.Tracker {<methods>;}
--keep class io.merculet.mlink.MLinkIntentBuilder {<methods>;}
-
--keep class io.merculet.log.DebugLog{<methods>;}
--keep class io.merculet.http.JsonRequest{<methods>;}
--keep class io.merculet.http.StringRequest{<methods>;}
-
--keep class io.merculet.config.APIConstant{*;}
--keep class io.merculet.http.HttpFactory{<methods>;}
--keep class io.merculet.http.JsonRequest{<methods>;}
--keep class io.merculet.http.Request{*;}
--keep class io.merculet.http.ResponseListener{*;}
--keep class io.merculet.http.StringRequest{<methods>;}
--keep class io.merculet.http.ImageLoader{*;}
--keep class io.merculet.log.DebugLog{<methods>;}
--keep class io.merculet.util.DeviceInfoUtils{<methods>;}
--keep class io.merculet.util.HttpResponseUtils{<methods>;}
--keep class io.merculet.util.JSONUtils{<methods>;}
--keep class io.merculet.util.Preconditions{<methods>;}
--keep class io.merculet.util.SPHelper{<methods>;}
--keep class io.merculet.util.Util{<methods>;}
-
-
--keep class io.merculet.ShareHelper{<methods>;}
--keep class io.merculet.config.Constant{*;}
--keep class io.merculet.util.DeviceInfoUtils{<methods>;}
-
-########### MagicWindow mLink Start###########
--keep class io.merculet.mlink.domain.** {*;}
--keep class io.merculet.mlink.annotation.** {*;}
--keep class io.merculet.MLinkAPI {<methods>;}
--keep class * implements io.merculet.MLinkAPI {<methods>;}
--keep class io.merculet.MLinkAPIFactory {<methods>;}
--keep class io.merculet.mlink.MLinkCallback {<methods>;}
--keep class io.merculet.mlink.YYBCallback {<methods>;}
--keep class io.merculet.MWFloatView{*;}
-
-
-##########MagicWindow Campain Start#############
--keep class io.merculet.marketing.share.activity.** {*;}
--keep class io.merculet.MWAPI {<methods>;}
--keep class io.merculet.MarketingHelper {<methods>;}
--keep class io.merculet.MWAPIFactory {*;}
--keep class io.merculet.MWImageView {<methods>;}
--keep class io.merculet.ClickParamsBuilder{*;}
--keep class io.merculet.marketing.dynamic.domain.** {*;}
--keep class io.merculet.marketing.share.domain.ShareData {<methods>;}
-
--keep public class io.merculet.WebViewActivity$JavaScriptInterface {
-    <fields>;
-    <methods>;
-}
--keep class io.merculet.marketing.dynamic.MWDynamicView {
-    <methods>;
-}
-
--keep class io.merculet.marketing.dynamic.MWDynamicCallback {
-    <methods>;
-}
-
--keep class io.merculet.marketing.dynamic.MWDynamicUtils {
-    <methods>;
-}
-
-
-# io.merculet.WebViewActivity$JavaScriptInterface
--keep public class io.merculet.WebViewActivity$JavaScriptInterface {
-    <fields>;
-    <methods>;
-}
-##########MagicWindow Ad Start#############
--keep class io.merculet.advertisement.domain.** {*;}
--keep class io.merculet.AdDisplay {<methods>;}
--keep class io.merculet.AdManager {*;}
--keep class io.merculet.AdTrack {<methods>;}
-#-keep class io.merculet.FeedAdView {
-#    public <methods>;
-#    public static <fields>;
-#}
+-keep class io.merculet.uav.sdk.http.JsonRequest{<methods>;}
+-keep class io.merculet.uav.sdk.http.StringRequest{<methods>;}
+-keep class io.merculet.uav.sdk.http.HttpFactory{<methods>;}
+-keep class io.merculet.uav.sdk.http.JsonRequest{<methods>;}
+-keep class io.merculet.uav.sdk.http.Request{*;}
+-keep class io.merculet.uav.sdk.http.ResponseListener{*;}
+-keep class io.merculet.uav.sdk.http.StringRequest{<methods>;}
+-keep class io.merculet.uav.sdk.http.ImageLoader{*;}
+-keep class io.merculet.uav.sdk.util.DeviceInfoUtils{<methods>;}
+-keep class io.merculet.uav.sdk.util.HttpResponseUtils{<methods>;}
+-keep class io.merculet.uav.sdk.util.JSONUtils{<methods>;}
+-keep class io.merculet.uav.sdk.util.Preconditions{<methods>;}
+-keep class io.merculet.uav.sdk.util.SPHelper{<methods>;}
+-keep class io.merculet.uav.sdk.util.Util{<methods>;}
+-keep class io.merculet.uav.sdk.util.DeviceInfoUtils{<methods>;}
 
 -keep public class * extends android.view.ViewGroup {
     public <init>(android.content.Context);
@@ -255,25 +190,4 @@
     public void get*(...);
     public static <fields>;
 }
-
-##########MagicWindow Content Start#############
-#-keep class io.merculet.content.** {*;}
-
--dontwarn android.support.v4.**
--keep interface android.support.v4.app.** { *; }
--keep public class * extends android.widget.LinearLayout
--keep class android.support.v4.** { *; }
--keep class io.merculet.content.** {*;}
--keep class io.merculet.content.domain** {*;}
-#-keep class io.merculet.content.refreshlayout** {*;}
--keep class io.merculet.content.view** {*;}
--keep class io.merculet.content.MWContentApiFactory {*;}
--keep class io.merculet.content.TabFragment {*;}
--keep class io.merculet.content.ItemsFragment {*;}
--keep class io.merculet.content.LazyFragment {*;}
--keep class io.merculet.content.BaseFragment {*;}
--keep class io.merculet.content.ContentDetailActivity {*;}
-
-
-##########MagicWindow end###########
 

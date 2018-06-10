@@ -34,7 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="io.merculet.OtherActivity"/>
 
         <service android:name="io.merculet.CheckExitService" />
 
