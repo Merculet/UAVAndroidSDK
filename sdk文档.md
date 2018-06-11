@@ -32,11 +32,11 @@ dependencies{
 }
 ```
 
-2,libmerculet.so
+2,libmagicwindow.so
 
-方法一：在项目的”src/main”目录中创建jniLibs目录，将libsecurityenv.so拷贝到jniLibs目录中
+方法一：在项目的”src/main”目录中创建jniLibs目录，将libmagicwindow.so拷贝到jniLibs目录中
 
-方法二：将各个平台的libsecurityenv.so拷贝到项目的libs目录中，修改build.gradle配置文件，内容如下：
+方法二：将各个平台的libmagicwindow.so拷贝到项目的libs目录中，修改build.gradle配置文件，内容如下：
 
 ```groovy
 android {
