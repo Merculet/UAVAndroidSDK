@@ -44,21 +44,5 @@ java文件内"io.merculet.uav.sdk"为 "cn.magicwindow.uav.sdk"
 
 将jar包导入build/output/中
 
-##6,发布jcenter
-
-```
-//国内
-userOrg = "magicwindow"
-groupId = "cn.magicwindow"
-artifactId = "uav-sdk"
-publishVersion = '1.0.0'
-desc = "magicwindow SDK"
-website = "http://open.mbc.magicwindow.cn"
-```
-
-```
-./gradlew bintrayUpload -PbintrayUser=magicwindow -PbintrayKey=6d1918f7aeb3992c0d051ab9388801acefde9aa1 -PdryRun=false
-```
-
 
 
