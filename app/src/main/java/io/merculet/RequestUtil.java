@@ -11,6 +11,7 @@ import java.util.Random;
 
 import io.merculet.example.BuildConfig;
 import io.merculet.uav.sdk.MConfiguration;
+import io.merculet.uav.sdk.TrackAgent;
 import io.merculet.uav.sdk.http.HttpFactory;
 import io.merculet.uav.sdk.http.JsonRequest;
 import io.merculet.uav.sdk.http.Request;
@@ -64,6 +65,7 @@ class RequestUtil {
                                 MConfiguration.get()
                                         .setToken(token)   //配置token
                                         .setUserId("3338f70dbe2e4044a3fffd5d709f2311");
+                                TrackAgent.currentEvent().event("sign in");
                             }
                         } else {
                             DebugLog.i("get Service Config error! ");

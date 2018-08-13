@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"
         buildConfigField "boolean", "CHINA_ENABLE", "Boolean.parseBoolean(\"${CHINA_ENABLE}\")"
@@ -68,41 +68,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile project(':MerculetSDK')
-//    compile 'cn.magicwindow:uav-sdk:1.0.0'
-}
-
-/** 替换为国内版包名 **/
-task replaceStringName(type: Copy) {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
-    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
-    if (china_enable) { //是否是国内版
-        //编译期间执行了,需要时打开
-        FileTree tree = fileTree(dir: 'src/main')
-        tree.include '**/*.java'
-        tree.include '**/*.xml'
-        tree.each { File mfile ->
-            fileReader(mfile.path, "io.merculet.uav.sdk", "cn.magicwindow.uav.sdk")    // io.merculet.uav.sdk
-        }
-    }
-}
-
-def fileReader(path, oldStr, newStr) {
-    def readerString = ""
-    def hasReplace = false
-    file(path).withReader('UTF-8') { reader ->
-        reader.eachLine {
-            if (it.find(oldStr) && !it.find(newStr)) {  //会出现重复替换
-                it = it.replace(oldStr, newStr)
-                hasReplace = true
-            }
-            readerString <<= it
-            readerString << '\n'
-        }
-        if (hasReplace) {
-            file(path).withWriter('UTF-8') {
-                within -> within.append(readerString)
-            }
-        }
-    }
+//    compile 'io.merculet:uav-sdk-en:1.0.1'
 }

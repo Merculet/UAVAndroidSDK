@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.merculet.uav.sdk.MConfiguration;
+import io.merculet.uav.sdk.RealTimeCallback;
 import io.merculet.uav.sdk.config.APIConstant;
 import io.merculet.uav.sdk.config.Constant;
 import io.merculet.uav.sdk.db.MessageUtils;
@@ -42,11 +43,11 @@ public class RequestManager {
         private static final RequestManager REQUEST_MANAGER = new RequestManager();
     }
 
-    public synchronized void upload(String upData) {
+    public synchronized void upload(String data) {
         SPHelper.create().setLastSendTime(System.currentTimeMillis());
         EventsProxy.create().clearEvents();
         DeviceInfoUtils.setFirstTag();  //设置非第一次启动tag
-        request(upData, "");    //退出账号上传数据时,上传失败会更新到本地
+        request(data, "");    //退出账号上传数据时,上传失败会更新到本地
     }
 
     public synchronized void uploadDb() {
@@ -68,9 +69,19 @@ public class RequestManager {
         }
     }
 
+    public synchronized void uploadRealTime(String data, RealTimeCallback callback) {
+        MyResponseListener listener = new MyResponseListener(data, callback);
+        request(data, listener);
+    }
+
     private void request(final String data, final String id) {
+        MyResponseListener listener = new MyResponseListener(data, id);
+        request(data, listener);
+    }
+
+    private void request(String data, MyResponseListener listener) {
         DebugLog.i("Track upload request: " + data);
-        Request request = new JsonRequest(Request.HttpMethod.POST, APIConstant.getTrackingUrl(), new MyResponseListener(data, id));
+        Request request = new JsonRequest(Request.HttpMethod.POST, APIConstant.getTrackingUrl(), listener);
         StringBuilder sb = new StringBuilder();
         final String upDataStr = data.replace("\"", "\\\"");
         sb.append("{").append("\r\n").append("\"info\":\"").append(upDataStr).append("\"").append("\r\n").append("}");
@@ -86,8 +97,14 @@ public class RequestManager {
 
     class MyResponseListener implements ResponseListener<JSONObject> {
 
-        private final String data;
-        private final String id;
+        private String data;
+        private String id;
+        private RealTimeCallback callback;
+
+        MyResponseListener(String data, RealTimeCallback callback) {
+            this.data = data;
+            this.callback = callback;
+        }
 
         MyResponseListener(String data, String id) {
             this.data = data;
@@ -104,27 +121,38 @@ public class RequestManager {
                         MessageUtils.deleteMsgByID(id);
                         DeviceInfoUtils.setFirstTag();  //设置非第一次启动tag
                     }
+                    if (callback != null) {
+                        callback.onSuccess();
+                    }
                 } else {
-                    insertMsg();
+                    onError(response);
                     if (response.code == Constant.NETWORK_RESPONSE_INVALIDATE || response.code == Constant.NETWORK_RESPONSE_EXPRIED) {   //token无效/失效,广播通知用户
                         MConfiguration.get().getContext().sendBroadcast(new Intent(Constant.ACTION_TOKEN_INVALID));
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                insertMsg();
+                onError(new HttpResponse(-2));
             }
         }
 
         @Override
         public void onFail(Exception e) {
-            insertMsg();
+            onError(new HttpResponse(-1));
         }
 
-        private void insertMsg() {
-            //本地数据上传失败不用存到本地
-            if (Preconditions.isBlank(id)) {
+        /**
+         * @param response code: -1 网络请求出错
+         *                 code: -2 json解析报错
+         */
+        private void onError(HttpResponse response) {
+            //本地数据上传失败不用存到本地:id不为空即本地
+            if (callback == null && Preconditions.isBlank(id)) {
                 MessageUtils.insertEventByMsg(data);
+            }
+            //实时传数据
+            if (callback != null && Preconditions.isBlank(id)) {
+                callback.onFailed(response);
             }
         }
     }

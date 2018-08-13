@@ -1,5 +1,6 @@
 package io.merculet.uav.sdk.domain.event;
 
+import io.merculet.uav.sdk.RealTimeCallback;
 import io.merculet.uav.sdk.manager.ScheduleManager;
 import io.merculet.uav.sdk.queue.BatchQueue;
 import io.merculet.uav.sdk.queue.QueueProcess;
@@ -49,6 +50,18 @@ public class EventsProxy {
                 }
             }
         });
+    }
+
+    //直接上传数据,带回调:只上传当前事件,不传本地,失败也不缓存
+    synchronized void sendRealTime(EventPojo event,RealTimeCallback callback) {
+        scheduleManager.start();
+        CompositeEvent compositeEvent = new CompositeEvent();
+        compositeEvent.external_user_id = SPHelper.create().getUserId();
+        compositeEvent.addEvent(event);
+        String jsonString = JSONUtils.objectToJsonString(compositeEvent);
+        if (Preconditions.isNotBlank(jsonString) && SPHelper.create().isAuto()) {
+            RequestManager.get().uploadRealTime(jsonString,callback);
+        }
     }
 
     public synchronized void onSend() {

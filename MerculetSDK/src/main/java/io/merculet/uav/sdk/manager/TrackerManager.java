@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 import io.merculet.uav.sdk.MConfiguration;
+import io.merculet.uav.sdk.RealTimeCallback;
 import io.merculet.uav.sdk.TrackAgent;
 import io.merculet.uav.sdk.config.Constant;
 import io.merculet.uav.sdk.db.MessageUtils;
 import io.merculet.uav.sdk.domain.UserProfile;
 import io.merculet.uav.sdk.domain.event.CustomEvent;
 import io.merculet.uav.sdk.domain.event.EventsProxy;
-import io.merculet.uav.sdk.log.DebugLog;
 import io.merculet.uav.sdk.util.DeviceInfoUtils;
 import io.merculet.uav.sdk.util.Preconditions;
 import io.merculet.uav.sdk.util.SPHelper;
@@ -183,36 +183,34 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
 
     @Override
     public void event(String id, Map<String, String> properties) {
-        if (TextUtils.isEmpty(id)) {
-            return;
-        }
-
-        if (properties == null) {
-            properties = new HashMap<>();
-        }
-
-        if (properties.containsKey(Constant.CUSTOM_KEY)) {
-            DebugLog.e("custom key '_k' is reserved word ! please change it");
-        }
-
-        CustomEvent custom = new CustomEvent();
-//          custom.st = Util.getCurrentTimeSecondStr();
-
-        if (properties == null) {
-
-            properties = new HashMap<>();
-        }
-
-        properties.put(Constant.SP_USER_TIMESTAMP,String.valueOf(System.currentTimeMillis()));
-
-        custom.action_params = properties;
-        custom.action = id;
+        if (TextUtils.isEmpty(id)) return;
+        CustomEvent custom = createEvent(id, properties);
         custom.send();
     }
 
     @Override
-    public void eventStart(String id) {
+    public void eventRealTime(String id, RealTimeCallback callback) {
+        eventRealTime(id, null, callback);
+    }
 
+    @Override
+    public void eventRealTime(String id, Map<String, String> properties, final RealTimeCallback callback) {
+        if (TextUtils.isEmpty(id)) return;
+        CustomEvent custom = createEvent(id, properties);
+        custom.sendRealTime(callback);
+    }
+
+    private CustomEvent createEvent(String id, Map<String, String> properties) {
+        if (properties == null) properties = new HashMap<>();
+        properties.put(Constant.SP_USER_TIMESTAMP, String.valueOf(System.currentTimeMillis()));
+        CustomEvent custom = new CustomEvent();
+        custom.action_params = properties;
+        custom.action = id;
+        return custom;
+    }
+
+    @Override
+    public void eventStart(String id) {
         timeMap.put(getCustomTimeKey(Constant.CUSTOM_START_TIME, id), Util.getCurrentTimeSecondStr());
     }
 
@@ -222,8 +220,6 @@ public class TrackerManager implements TrackAgent.TrackerInterface {
             if (Preconditions.isNotBlank(getCustomTimeKey(Constant.CUSTOM_START_TIME, id))) {
                 CustomEvent custom = new CustomEvent();
                 properties.put(Constant.CUSTOM_KEY, id);
-//                custom.st = timeMap.get(getCustomTimeKey(Constant.CUSTOM_START_TIME, id));
-//                custom.et = Util.getCurrentTimeSecondStr();
                 custom.action_params = properties;
                 custom.send();
                 timeMap.remove(getCustomTimeKey(Constant.CUSTOM_START_TIME, properties.get(Constant.CUSTOM_ID)));

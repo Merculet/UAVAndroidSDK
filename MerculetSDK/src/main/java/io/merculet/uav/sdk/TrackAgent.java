@@ -49,6 +49,10 @@ public class TrackAgent {
 
         void event(String id);
 
+        void eventRealTime(String id, RealTimeCallback callback);
+
+        void eventRealTime(String id, Map<String, String> properties, RealTimeCallback callback);
+
         void eventStart(String id);
 
         void eventEnd(String id, Map<String, String> properties);

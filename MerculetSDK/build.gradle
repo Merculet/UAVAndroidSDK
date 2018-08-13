@@ -41,84 +41,22 @@ dependencies {
 }
 
 //============== 以下开始是将Android Library上传到jcenter的相关配置 =============
+publish {
+    //国外
+    userOrg = "magicwindow"
+    groupId = "io.merculet"
+    artifactId = "uav-sdk-en"
+    publishVersion = '1.1.0'
+    desc = "merculet SDK"
+    website = "http://merculet-saas.liaoyantech.cn"
 
-//=============================== 打包jar ===================================
-//删除旧的jar的Task：deleteOldJar 名字随便写
-task deleteOldJar(type: Delete) {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
-    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
-    if (china_enable) { //是否是国内版
-        delete 'build/outputs/uav-sdk.jar'
-    } else {
-        delete 'build/outputs/uav-sdk-en.jar'
-    }
-}
-//导出新的jar，exportJar也可是别的名字
-task exportJar(type: Copy) {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
-    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
-    from('build/intermediates/bundles/release/')//原地址
-    into('build/outputs/')//导出后的地址
-    include('classes.jar')
-    if (china_enable) { //是否是国内版
-        rename('classes.jar', 'uav-sdk.jar')//重命名jar
-    } else {
-        rename('classes.jar', 'uav-sdk-en.jar')
-    }
-}
-exportJar.dependsOn(deleteOldJar, build)
-
-//============================  修改包名相关  ================================
-/** 替换为国内版包名 **/
-task replacePackageName(type: Copy) {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
-    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
-    if (china_enable) { //是否是国内版
-        from 'src/main/java/io/merculet/uav/sdk'
-        into 'src/main/java/cn/magicwindow/uav/sdk'
-        doLast { delete 'src/main/java/io' }    //doLast导致不能编译时执行
-
-        //编译期间执行了,需要时打开
-        FileTree tree = fileTree(dir: 'src/main')
-        tree.include '**/*.java'
-        tree.include '**/*.xml'
-        tree.each { File mfile ->
-            fileReader(mfile.path, "io.merculet.uav.sdk", "cn.magicwindow.uav.sdk")    // io.merculet.uav.sdk
-        }
-
-        //修改为国内版SignUtils中字符串名
-        FileTree treeJava = fileTree("src/main/java/io/merculet/uav/sdk/util/SignUtils.java")
-        treeJava.each { File mfile ->
-            fileReader(mfile.path, "merculet", "magicwindow")
-        }
-
-        //混淆文件修改
-        FileTree treePro = fileTree("proguard-rules.pro")
-        treePro.each { File mfile ->
-            fileReader(mfile.path, "io.merculet.uav.sdk", "cn.magicwindow.uav.sdk")
-        }
-    }
-}
-
-def fileReader(path, oldStr, newStr) {
-    def readerString = ""
-    def hasReplace = false
-    file(path).withReader('UTF-8') { reader ->
-        reader.eachLine {
-            if (it.find(oldStr) && !it.find(newStr)) {  //会出现重复替换
-                it = it.replace(oldStr, newStr)
-                hasReplace = true
-            }
-            readerString <<= it
-            readerString << '\n'
-        }
-        if (hasReplace) {
-            file(path).withWriter('UTF-8') {
-                within -> within.append(readerString)
-            }
-        }
-    }
+    //国内
+//    userOrg = "magicwindow"
+//    groupId = "cn.magicwindow"
+//    artifactId = "uav-sdk"
+//    publishVersion = '1.1.0'
+//    desc = "magicwindow SDK"
+//    website = "http://open.mbc.magicwindow.cn"
+//    $ ./gradlew bintrayUpload -PbintrayUser=magicwindow -PbintrayKey=6d1918f7aeb3992c0d051ab9388801acefde9aa1 -PdryRun=false
+    //$ ./gradlew bintrayUpload -PbintrayUser=lucio -PbintrayKey=fbd6d0bfe8fe9b312a7138b1a5ec75a5e873728e -PdryRun=false
 }

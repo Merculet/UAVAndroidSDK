@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.merculet.uav.sdk.domain.Device;
-import io.merculet.uav.sdk.util.Preconditions;
 import io.merculet.uav.sdk.util.SPHelper;
-import io.merculet.uav.sdk.util.Util;
 
 /**
  * Created by aaron on 15/1/10.
@@ -25,7 +23,6 @@ public class CompositeEvent {
     }
 
     public void addEvent(EventPojo event) {
-
         actions.add(event);
     }
 

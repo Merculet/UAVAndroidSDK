@@ -57,7 +57,7 @@ android {
 
 ```groovy
 dependencies {
-	compile 'cn.magicwindow:uav-sdk:1.0.0'
+	compile 'cn.magicwindow:uav-sdk:1.1.0'
 }
 ```
 
@@ -237,7 +237,7 @@ TrackAgent.currentEvent().event("您自定义的event id");
 // eventId事件标识
 // properties事件参数的键值对
 TrackAgent.currentEvent().event("您自定义的event id", Map<String,String>);
-代码示例：：
+代码示例：
 HashMap<String,String> map = new HashMap<String,String>();
 map.put("invitationCode","2098");
 map.put("amount","300");
@@ -258,7 +258,31 @@ TrackAgent.currentEvent().event Start(String eventId );
 TrackAgent.currentEvent().event (String eventId, Map<String,String> properties);
 ```
 
+（3）实时事件:数据即时上传,并带请求成功失败回调
 
+代码示例：
+
+```java
+// eventId事件标识
+// properties 事件参数的键值对
+TrackAgent.currentEvent().eventRealTime(String id, RealTimeCallback callback);
+TrackAgent.currentEvent().eventRealTime(String id, Map<String, String> properties, RealTimeCallback callback);
+//如下
+HashMap<String, String> properties = new HashMap<>();
+properties.put("realTime", "实时事件");
+TrackAgent.currentEvent().eventRealTime("您自定义的event id", properties, 
+                                        new RealTimeCallback() {
+      @Override
+      public void onSuccess() {
+        Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
+      }
+
+      @Override
+      public void onFailed(HttpResponse response) {
+        Toast.makeText(MainActivity.this, response.message, Toast.LENGTH_SHORT).show();
+      }
+});
+```
 
 注意：
 

@@ -155,6 +155,7 @@
 -keep class io.merculet.uav.sdk.MConfiguration {*;}
 -keep class io.merculet.uav.sdk.manager.MWLifecycleCallbacks {*;}
 -keep class io.merculet.uav.sdk.Session {<methods>;}
+-keep class io.merculet.uav.sdk.RealTimeCallback {<methods>;}
 
 -keep class io.merculet.uav.sdk.TrackAgent {<methods>;}
 -keep interface io.merculet.uav.sdk.TrackAgent$TrackerInterface {

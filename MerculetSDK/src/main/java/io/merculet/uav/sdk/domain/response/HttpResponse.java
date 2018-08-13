@@ -9,6 +9,18 @@ public class HttpResponse implements Serializable {
     public int code;
     public String message;
 
+    public HttpResponse(int code) {
+        this.code = code;
+    }
+
+    public HttpResponse(int code,String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public HttpResponse() {
+    }
+
     public boolean isOkStatus() {
         return code == 0;
     }
