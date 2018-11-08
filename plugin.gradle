@@ -1,0 +1,201 @@
+//app
+/** 替换为国内版包名 **/
+task replaceStringName(type: Copy) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
+    if (china_enable) { //是否是国内版
+        //编译期间执行了,需要时打开
+        FileTree tree = fileTree(dir: './app/src/main')
+        tree.include '**/*.java'
+        tree.include '**/*.xml'
+        tree.each { File mfile ->
+            fileReader(mfile.path, "io.merculet.uav.sdk", "cn.magicwindow.uav.sdk")    // io.merculet.uav.sdk
+        }
+    } else {
+        //编译期间执行了,需要时打开
+        FileTree tree = fileTree(dir: './app/src/main')
+        tree.include '**/*.java'
+        tree.include '**/*.xml'
+        tree.each { File mfile ->
+            fileReader(mfile.path, "cn.magicwindow.uav.sdk", "io.merculet.uav.sdk")    // io.merculet.uav.sdk
+        }
+    }
+}
+
+//MerculetSdk
+//=============================== 打包jar ===================================
+//删除旧的jar的Task：deleteOldJar
+task deleteOldJar(type: Delete) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
+    if (china_enable) { //是否是国内版
+        delete './MerculetSDK/build/outputs/uav-sdk-1.1.3.jar'
+    } else {
+        delete './MerculetSDK/build/outputs/uav-sdk-en-1.1.3.jar'
+    }
+}
+//导出新的jar，exportJar也可是别的名字
+task exportJar(type: Copy) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
+    from('./MerculetSDK/build/intermediates/bundles/release/')//原地址
+    into('./MerculetSDK/build/outputs/')//导出后的地址
+    include('classes.jar')
+    if (china_enable) { //是否是国内版
+        rename('classes.jar', 'uav-sdk-1.1.3.jar')//重命名jar
+    } else {
+        rename('classes.jar', 'uav-sdk-en-1.1.3.jar')
+    }
+}
+exportJar.dependsOn(deleteOldJar)
+
+//============================  修改包名相关  ================================
+/** 替换为国内版包名 **/
+task replacePackageName(type: Copy) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
+    if (china_enable) { //是否是国内版
+        copy {
+            from './MerculetSDK/src/main/java/io/merculet/uav/sdk'
+            into './MerculetSDK/src/main/java/cn/magicwindow/uav/sdk'
+        }.findResult {
+            delete './MerculetSDK/src/main/java/io'
+        }
+
+        //编译期间执行了,需要时打开
+        FileTree tree = fileTree(dir: './MerculetSDK/src/main')
+        tree.include '**/*.java'
+        tree.include '**/*.xml'
+        tree.each { File mfile ->
+            fileReader(mfile.path, "io.merculet.uav.sdk", "cn.magicwindow.uav.sdk")    // io.merculet.uav.sdk
+        }
+
+        //修改为国内版SignUtils中字符串名
+        FileTree treeJava = fileTree("./MerculetSDK/src/main/java/cn/magicwindow/uav/sdk/util/SignUtils.java")
+        treeJava.each { File mfile ->
+            fileReader(mfile.path, "merculet", "magicwindow")
+        }
+
+        //混淆文件修改
+        FileTree treePro = fileTree("./MerculetSDK/proguard-rules.pro")
+        treePro.each { File mfile ->
+            fileReader(mfile.path, "io.merculet.uav.sdk", "cn.magicwindow.uav.sdk")
+        }
+    } else {
+        copy {
+            from './MerculetSDK/src/main/java/cn/magicwindow/uav/sdk'
+            into './MerculetSDK/src/main/java/io/merculet/uav/sdk'
+        }.findResult {
+            delete './MerculetSDK/src/main/java/cn'
+        }
+
+        //编译期间执行了,需要时打开
+        FileTree tree = fileTree(dir: './MerculetSDK/src/main')
+        tree.include '**/*.java'
+        tree.include '**/*.xml'
+        tree.each { File mfile ->
+            fileReader(mfile.path, "cn.magicwindow.uav.sdk", "io.merculet.uav.sdk")
+        }
+
+        //修改为国内版SignUtils中字符串名
+        FileTree treeJava = fileTree("./MerculetSDK/src/main/java/io/merculet/uav/sdk/util/SignUtils.java")
+        treeJava.each { File mfile ->
+            fileReader(mfile.path, "magicwindow", "merculet")
+        }
+
+        //混淆文件修改
+        FileTree treePro = fileTree("./MerculetSDK/proguard-rules.pro")
+        treePro.each { File mfile ->
+            fileReader(mfile.path, "cn.magicwindow.uav.sdk", "io.merculet.uav.sdk")
+        }
+    }
+}
+
+//Codec
+//=============================== 打包so ===================================
+//删除旧的so的Task：deleteOldSo 名字随便写
+task deleteOldSo(type: Delete) {
+    delete './MerculetSDK/libs'
+}
+//导出新的so
+task exportSo(type: Copy) {
+    from('./Codec/build/intermediates/cmake/release/obj')//原地址
+    include('**/*.so')
+    into('./MerculetSDK/libs/')//导出到MerculetSDK
+}
+exportSo.dependsOn(deleteOldSo)
+
+//============================  修改包名相关  ================================
+/** 替换为国内版文件名 **/
+task replaceCppName(type: Copy) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
+    if (china_enable) {
+        copy {
+            from './Codec/src/main/cpp/merculet-lib.cpp'
+            into './Codec/src/main/cpp'
+            rename { "magicwindow-lib.cpp" }
+        }.findResult {
+            delete './Codec/src/main/cpp/merculet-lib.cpp'
+        }
+
+        //修改为国内版CMakeLists.txt中字符串名
+        FileTree treeTxt = fileTree("./Codec/CMakeLists.txt")
+        treeTxt.each { File mfile ->
+            fileReader(mfile.path, "merculet", "magicwindow")
+        }
+
+        //修改为国内版cpp下字符串名
+        FileTree tree = fileTree(dir: './Codec/src/main')
+        tree.include '**/*.cpp'
+        tree.each { File mfile ->
+            fileReader(mfile.path, "io_merculet_uav_sdk", "cn_magicwindow_uav_sdk")
+        }
+    } else {
+        copy {
+            from './Codec/src/main/cpp/magicwindow-lib.cpp'
+            into './Codec/src/main/cpp'
+            rename { "merculet-lib.cpp" }
+        }.findResult {
+            delete './Codec/src/main/cpp/magicwindow-lib.cpp'
+        }
+
+        //修改为国内版CMakeLists.txt中字符串名
+        FileTree treeTxt = fileTree("./Codec/CMakeLists.txt")
+        treeTxt.each { File mfile ->
+            fileReader(mfile.path, "magicwindow", "merculet")
+        }
+
+        //修改为国内版cpp下字符串名
+        FileTree tree = fileTree(dir: './Codec/src/main')
+        tree.include '**/*.cpp'
+        tree.each { File mfile ->
+            fileReader(mfile.path, "cn_magicwindow_uav_sdk", "io_merculet_uav_sdk")
+        }
+    }
+}
+
+def fileReader(path, oldStr, newStr) {
+    def readerString = ""
+    def hasReplace = false
+    file(path).withReader('UTF-8') { reader ->
+        reader.eachLine {
+            if (it.find(oldStr) && !it.find(newStr)) {  //会出现重复替换
+                it = it.replace(oldStr, newStr)
+                hasReplace = true
+            }
+            readerString <<= it
+            readerString << '\n'
+        }
+        if (hasReplace) {
+            file(path).withWriter('UTF-8') {
+                within -> within.append(readerString)
+            }
+        }
+    }
+}

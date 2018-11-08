@@ -49,6 +49,10 @@ android {
 }
 ```
 
+如下图所示
+
+![3891539343476_.pic](/Users/lucio/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/9962e40ea6e03b6dc6a9a02918d59dee/Message/MessageTemp/9e20f478899dc29eb19741386f9343c8/Image/3891539343476_.pic.jpg)
+
 ### 1.1.3  添加SDK在maven中心库的线上依赖
 
 通过在Android Studio工程build.gradle配置脚本中添加maven线上依赖，导入最新版本组件化基础库和统计SDK。
@@ -57,7 +61,7 @@ android {
 
 ```groovy
 dependencies {
-	compile 'cn.magicwindow:uav-sdk:1.1.0'
+	compile 'cn.magicwindow:uav-sdk:1.1.2'
 }
 ```
 
@@ -86,35 +90,19 @@ allprojects {
 <!-- 检测手机基本状态 -->
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 <!-- 缓存资源优先存入SDcard -->
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />  
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
 ```
 
-## 1.3获取AppKey等信息
+## 1.3获取AppKey
 
-### 1.3.1后台获取Appkey等信息
-
-登录后台管理（[http://merculet.cn/](http://merculet.cn/)）。进入“产品管理”菜单，填写相应内容创建应用，并获取应用的
+登录后台管理（<https://open.merculet.cn/>）。进入“产品管理”菜单，填写相应内容创建应用，并获取应用的
 appkey、account_key、account_secret的值。
-
-### 1.3.2获取Token
-
-基于上述三个数值，接入方需要调用签发Token的接口。
-
-### 1.3.3Token失效
-
-当token失效时,会发送自定义广播,接入方需要接收广播并更新token
 
 
 
 # 二．基本功能集成（必加项）
 
 ## 2.1初始化SDK
-
-
-```java
-MConfiguration.get().init(Application context)
-```
 
 在程序Application的onCreate函数中调用初始化接口
 
@@ -127,7 +115,7 @@ MConfiguration.get().init(this)
 初始化完成之后，需要向sdk设置token。此token需要调用获取用户凭证接口获得(https://mb-helpcenter.magicwindow.cn/doc/api)
 
 ```java
-MConfiguration.get().init(app).setToken(token);
+MConfiguration.get().setToken(token)
 ```
 
 设置完token之后完成sdk的初始化工作。
@@ -135,7 +123,7 @@ MConfiguration.get().init(app).setToken(token);
 此外，值得注意的是在用户登录成功时，需要调用
 
 ```java
-TrackAgent.currentEvent().setUserId(String userId) 
+TrackAgent.currentEvent().setUserProfile(userId) 
 ```
 
 在用户注销登录时，需要调用
@@ -144,7 +132,7 @@ TrackAgent.currentEvent().setUserId(String userId)
 TrackAgent.currentEvent().cancelUserProfile()
 ```
 
-2.1.1 token失效处理
+2.1.1 当token失效时,会发送自定义广播,接入方需要接收广播并更新token
 
 动态注册广播接收者
 
@@ -175,7 +163,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 静态注册广播接收者
 
 ```java
-<receiver android:name="io.merculet.MyBroadcastReceiver">
+<receiver android:name="io.merculet.config.MyBroadcastReceiver">
 	<intent-filter>
         <action android:name="action_token_invalid"/>	//同Constant.ACTION_TOKEN_INVALID
     </intent-filter>
@@ -258,7 +246,7 @@ TrackAgent.currentEvent().event Start(String eventId );
 TrackAgent.currentEvent().event (String eventId, Map<String,String> properties);
 ```
 
-（3）实时事件:数据即时上传,并带请求成功失败回调
+（3）实时事件:数据即时上传
 
 代码示例：
 
@@ -270,18 +258,7 @@ TrackAgent.currentEvent().eventRealTime(String id, Map<String, String> propertie
 //如下
 HashMap<String, String> properties = new HashMap<>();
 properties.put("realTime", "实时事件");
-TrackAgent.currentEvent().eventRealTime("您自定义的event id", properties, 
-                                        new RealTimeCallback() {
-      @Override
-      public void onSuccess() {
-        Toast.makeText(MainActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
-      }
-
-      @Override
-      public void onFailed(HttpResponse response) {
-        Toast.makeText(MainActivity.this, response.message, Toast.LENGTH_SHORT).show();
-      }
-});
+TrackAgent.currentEvent().eventRealTime("您自定义的event id", properties);
 ```
 
 注意：

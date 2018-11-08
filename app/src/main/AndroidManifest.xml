@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="io.merculet.example">
+          xmlns:tools="http://schemas.android.com/tools" package="io.merculet.example">
 
     <!-- 连接互联网Internet权限 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
@@ -26,16 +26,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="io.merculet.MainActivity">
+        android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="io.merculet.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="io.merculet.activity.TestingActivity"/>
+        <activity android:name="io.merculet.activity.UavHistoryActivity"/>
+        <activity android:name="io.merculet.activity.UatHistoryActivity"/>
+        <activity android:name="io.merculet.activity.EventHistoryActivity" />
 
-        <service android:name="io.merculet.CheckExitService" />
+        <service android:name="io.merculet.config.CheckExitService" />
 
         <!-- 渠道 -->
         <meta-data

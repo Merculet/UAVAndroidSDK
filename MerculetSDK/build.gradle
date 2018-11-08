@@ -8,6 +8,7 @@ android {
         minSdkVersion 11
         targetSdkVersion 15
         buildConfigField "boolean", "CHINA_ENABLE", "Boolean.parseBoolean(\"${CHINA_ENABLE}\")"
+        buildConfigField "boolean", "IS_DEBUG", "Boolean.parseBoolean(\"${IS_DEBUG}\")"
     }
 
     buildTypes {
@@ -46,7 +47,7 @@ publish {
     userOrg = "magicwindow"
     groupId = "io.merculet"
     artifactId = "uav-sdk-en"
-    publishVersion = '1.1.0'
+    publishVersion = '1.1.4'
     desc = "merculet SDK"
     website = "http://merculet-saas.liaoyantech.cn"
 
@@ -54,7 +55,7 @@ publish {
 //    userOrg = "magicwindow"
 //    groupId = "cn.magicwindow"
 //    artifactId = "uav-sdk"
-//    publishVersion = '1.1.0'
+//    publishVersion = '1.1.3'
 //    desc = "magicwindow SDK"
 //    website = "http://open.mbc.magicwindow.cn"
 //    $ ./gradlew bintrayUpload -PbintrayUser=magicwindow -PbintrayKey=6d1918f7aeb3992c0d051ab9388801acefde9aa1 -PdryRun=false

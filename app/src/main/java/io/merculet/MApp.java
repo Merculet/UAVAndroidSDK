@@ -3,7 +3,8 @@ package io.merculet;
 import android.app.Application;
 import android.content.Intent;
 
-import io.merculet.uav.sdk.MConfiguration;
+import io.merculet.config.CheckExitService;
+import cn.magicwindow.uav.sdk.MConfiguration;
 
 
 /**

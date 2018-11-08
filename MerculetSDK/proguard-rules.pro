@@ -151,37 +151,37 @@
 
 ########### MagicWindow Core Start###########
 
--keep class io.merculet.uav.sdk.domain.** {*;}
--keep class io.merculet.uav.sdk.MConfiguration {*;}
--keep class io.merculet.uav.sdk.manager.MWLifecycleCallbacks {*;}
--keep class io.merculet.uav.sdk.Session {<methods>;}
--keep class io.merculet.uav.sdk.RealTimeCallback {<methods>;}
+-keep class cn.magicwindow.uav.sdk.domain.** {*;}
+-keep class cn.magicwindow.uav.sdk.MConfiguration {*;}
+-keep class cn.magicwindow.uav.sdk.manager.MWLifecycleCallbacks {*;}
+-keep class cn.magicwindow.uav.sdk.Session {<methods>;}
+-keep class cn.magicwindow.uav.sdk.RealTimeCallback {<methods>;}
 
--keep class io.merculet.uav.sdk.TrackAgent {<methods>;}
--keep interface io.merculet.uav.sdk.TrackAgent$TrackerInterface {
+-keep class cn.magicwindow.uav.sdk.TrackAgent {<methods>;}
+-keep interface cn.magicwindow.uav.sdk.TrackAgent$TrackerInterface {
     <fields>;
     <methods>;
 }
--keep class io.merculet.uav.sdk.queue.** {*;}
--keep class io.merculet.uav.sdk.config.Constant{*;}
--keep class io.merculet.uav.sdk.log.DebugLog{<methods>;}
--keep class io.merculet.uav.sdk.ShareHelper{<methods>;}
+-keep class cn.magicwindow.uav.sdk.queue.** {*;}
+-keep class cn.magicwindow.uav.sdk.config.Constant{*;}
+-keep class cn.magicwindow.uav.sdk.log.DebugLog{<methods>;}
+-keep class cn.magicwindow.uav.sdk.ShareHelper{<methods>;}
 
--keep class io.merculet.uav.sdk.http.JsonRequest{<methods>;}
--keep class io.merculet.uav.sdk.http.StringRequest{<methods>;}
--keep class io.merculet.uav.sdk.http.HttpFactory{<methods>;}
--keep class io.merculet.uav.sdk.http.JsonRequest{<methods>;}
--keep class io.merculet.uav.sdk.http.Request{*;}
--keep class io.merculet.uav.sdk.http.ResponseListener{*;}
--keep class io.merculet.uav.sdk.http.StringRequest{<methods>;}
--keep class io.merculet.uav.sdk.http.ImageLoader{*;}
--keep class io.merculet.uav.sdk.util.DeviceInfoUtils{<methods>;}
--keep class io.merculet.uav.sdk.util.HttpResponseUtils{<methods>;}
--keep class io.merculet.uav.sdk.util.JSONUtils{<methods>;}
--keep class io.merculet.uav.sdk.util.Preconditions{<methods>;}
--keep class io.merculet.uav.sdk.util.SPHelper{<methods>;}
--keep class io.merculet.uav.sdk.util.Util{<methods>;}
--keep class io.merculet.uav.sdk.util.DeviceInfoUtils{<methods>;}
+-keep class cn.magicwindow.uav.sdk.http.JsonRequest{<methods>;}
+-keep class cn.magicwindow.uav.sdk.http.StringRequest{<methods>;}
+-keep class cn.magicwindow.uav.sdk.http.HttpFactory{<methods>;}
+-keep class cn.magicwindow.uav.sdk.http.JsonRequest{<methods>;}
+-keep class cn.magicwindow.uav.sdk.http.Request{*;}
+-keep class cn.magicwindow.uav.sdk.http.ResponseListener{*;}
+-keep class cn.magicwindow.uav.sdk.http.StringRequest{<methods>;}
+-keep class cn.magicwindow.uav.sdk.http.ImageLoader{*;}
+-keep class cn.magicwindow.uav.sdk.util.DeviceInfoUtils{<methods>;}
+-keep class cn.magicwindow.uav.sdk.util.HttpResponseUtils{<methods>;}
+-keep class cn.magicwindow.uav.sdk.util.JSONUtils{<methods>;}
+-keep class cn.magicwindow.uav.sdk.util.Preconditions{<methods>;}
+-keep class cn.magicwindow.uav.sdk.util.SPHelper{<methods>;}
+-keep class cn.magicwindow.uav.sdk.util.Util{<methods>;}
+-keep class cn.magicwindow.uav.sdk.util.DeviceInfoUtils{<methods>;}
 
 -keep public class * extends android.view.ViewGroup {
     public <init>(android.content.Context);

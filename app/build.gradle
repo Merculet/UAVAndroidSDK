@@ -13,6 +13,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"
         buildConfigField "boolean", "CHINA_ENABLE", "Boolean.parseBoolean(\"${CHINA_ENABLE}\")"
+        buildConfigField "boolean", "IS_DEBUG", "Boolean.parseBoolean(\"${IS_DEBUG}\")"
     }
     buildTypes {
         release {
@@ -67,6 +68,20 @@ android {
 dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.4.0'
+    compile "com.android.support:recyclerview-v7:25.4.0"
     compile project(':MerculetSDK')
-//    compile 'io.merculet:uav-sdk-en:1.0.1'
+//    compile 'io.merculet:uav-sdk-en:1.1.3'
+
+//    Properties properties = new Properties()
+//    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+//    def china_enable = properties.getProperty('CHINA_ENABLE', null).toBoolean()
+//    if (china_enable) {
+//        compile 'cn.magicwindow:uav-sdk:1.1.3'
+//    } else {
+//        compile 'io.merculet:uav-sdk-en:1.1.3'
+//    }
+}
+
+repositories {
+    mavenCentral()
 }
