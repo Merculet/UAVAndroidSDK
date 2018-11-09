@@ -45,9 +45,9 @@ task exportJar(type: Copy) {
     into('./MerculetSDK/build/outputs/')//导出后的地址
     include('classes.jar')
     if (china_enable) { //是否是国内版
-        rename('classes.jar', 'uav-sdk-1.1.3.jar')//重命名jar
+        rename('classes.jar', 'uav-sdk-1.1.4.jar')//重命名jar
     } else {
-        rename('classes.jar', 'uav-sdk-en-1.1.3.jar')
+        rename('classes.jar', 'uav-sdk-en-1.1.4.jar')
     }
 }
 exportJar.dependsOn(deleteOldJar)

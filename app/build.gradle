@@ -69,7 +69,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile "com.android.support:recyclerview-v7:25.4.0"
-    compile project(':MerculetSDK')
+    compile 'cn.magicwindow:uav-sdk:1.1.4'
+//    compile project(':MerculetSDK')
 //    compile 'io.merculet:uav-sdk-en:1.1.3'
 
 //    Properties properties = new Properties()

@@ -44,20 +44,18 @@ dependencies {
 //============== 以下开始是将Android Library上传到jcenter的相关配置 =============
 publish {
     //国外
-    userOrg = "magicwindow"
-    groupId = "io.merculet"
-    artifactId = "uav-sdk-en"
-    publishVersion = '1.1.4'
-    desc = "merculet SDK"
-    website = "http://merculet-saas.liaoyantech.cn"
+//    userOrg = "magicwindow"
+//    groupId = "io.merculet"
+//    artifactId = "uav-sdk-en"
+//    publishVersion = '1.1.4'
+//    desc = "merculet SDK"
+//    website = "http://merculet-saas.liaoyantech.cn"
 
     //国内
-//    userOrg = "magicwindow"
-//    groupId = "cn.magicwindow"
-//    artifactId = "uav-sdk"
-//    publishVersion = '1.1.3'
-//    desc = "magicwindow SDK"
-//    website = "http://open.mbc.magicwindow.cn"
-//    $ ./gradlew bintrayUpload -PbintrayUser=magicwindow -PbintrayKey=6d1918f7aeb3992c0d051ab9388801acefde9aa1 -PdryRun=false
-    //$ ./gradlew bintrayUpload -PbintrayUser=lucio -PbintrayKey=fbd6d0bfe8fe9b312a7138b1a5ec75a5e873728e -PdryRun=false
+    userOrg = "magicwindow"
+    groupId = "cn.magicwindow"
+    artifactId = "uav-sdk"
+    publishVersion = '1.1.4'
+    desc = "magicwindow SDK"
+    website = "http://open.mbc.magicwindow.cn"
 }
